@@ -1,32 +1,31 @@
-const mineflayer = require('mineflayer');
-const express = require('express');  // Import Express
+const mineflayer = require('mineflayer')
+const express = require('express')
 
-const app = express();
-const port = process.env.PORT || 3000;
+const app = express()
 
-// Ping route — Railway or UptimeRobot will hit this to keep your bot awake
+// Express server to respond with "Bot is alive!"
 app.get('/', (req, res) => {
-  res.send('Bot is awake!');
-});
+  res.send('Bot is alive!')
+})
 
-// Start Express server
-app.listen(port, () => {
-  console.log(`Ping server listening on port ${port}`);
-});
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
 
 function createBot () {
   const bot = mineflayer.createBot({
-    host: 'LifeMC-V2uq.aternos.me', // SERVER IP
-    username: 'yahya',               // BOT NAME
-    port: 51755,                    // SERVER PORT
+    host: 'LifeMC-V2uq.aternos.me', // Your Minecraft server IP
+    username: 'yahya',               // Your bot username
+    port: 51755,                    // Minecraft server port
     version: '1.16.5',
-  });
+  })
 
   bot.on('spawn', () => {
-    bot.chat('/register aagop04');
-  });
+    bot.chat('/register aagop04')  
+  })
 
-  // NO TOCAR /// DO NOT TOUCH
+  // Bot movement code (keep your existing code here)
   bot.on("move", function() {
     bot.setControlState("jump", true);
     setTimeout(() => {
@@ -62,9 +61,9 @@ function createBot () {
     }, 500);
   });
 
-  bot.on('kicked', console.log);
-  bot.on('error', console.log);
-  bot.on('end', createBot);
+  bot.on('kicked', console.log)
+  bot.on('error', console.log)
+  bot.on('end', createBot)
 }
 
-createBot();
+createBot()
