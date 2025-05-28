@@ -9,9 +9,6 @@ function createBot () {
     version: '1.16.5',
   })
 
-  bot.on('spawn', () => {
-    bot.chat('/register aagop04')  
-  })
 
   bot.on("move", function() {
     bot.setControlState("jump", true);
